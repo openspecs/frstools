@@ -1,0 +1,75 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://openspecs.org/frs/frs-schema.json",
+  "title": "Fullstack Requirement Specification (FRS)",
+  "description": "Schema for validating YAML frontmatter in FRS documents. Version 1.0.5.",
+  "type": "object",
+  "required": ["id", "user", "context", "trigger", "user_outcome"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Unique identifier for the requirement",
+      "pattern": "^[A-Z][A-Z0-9-]+$",
+      "examples": ["AUTH-001", "TOOL-LOG-001"]
+    },
+    "user": {
+      "type": "string",
+      "description": "Role or actor performing the action",
+      "examples": ["Analyst", "Manager", "System"]
+    },
+    "context": {
+      "type": "string",
+      "description": "Location or state where the user begins",
+      "examples": ["Login page", "Dashboard"]
+    },
+    "trigger": {
+      "type": "string",
+      "description": "Event or action that initiates the flow",
+      "examples": ["Clicks Submit", "Opens report"]
+    },
+    "user_outcome": {
+      "type": "string",
+      "description": "What the user achieves",
+      "examples": ["Access dashboard in 5 seconds"]
+    },
+    "business_outcome": {
+      "type": "string",
+      "description": "Measurable business value",
+      "examples": ["Reduce default rate by 15%"]
+    },
+    "priority": {
+      "type": "string",
+      "enum": ["critical", "high", "medium", "low", "skip"],
+      "description": "Importance level"
+    },
+    "status": {
+      "type": "string",
+      "enum": ["draft", "approved", "implemented"],
+      "description": "Current state of the requirement"
+    },
+    "estimate": {
+      "type": "string",
+      "description": "Time estimate",
+      "pattern": "^[0-9]+[dwh]$",
+      "examples": ["3d", "2w", "8h"]
+    },
+    "depends_on": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^[A-Z][A-Z0-9-]+$"
+      },
+      "description": "Array of requirement IDs this depends on",
+      "examples": [["AUTH-001", "USER-002"]]
+    },
+    "tags": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Array of categorization labels",
+      "examples": [["security", "mvp"]]
+    }
+  },
+  "additionalProperties": true
+}

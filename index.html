@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FRS Tools</title>
+    <link rel="stylesheet" href="./styles/main.css" />
+    <!-- Content Security Policy -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; connect-src 'self' https://raw.githubusercontent.com; img-src 'self' data:; style-src 'self'; object-src 'none'; base-uri 'self'" />
+    <!-- Vendored libs (no CDN) -->
+    <script src="./tooling/js-yaml.min.js"></script>
+    <!-- Pre-compiled PEG parser — no runtime eval required -->
+    <script src="./tooling/frs-flow-parser.js"></script>
+  </head>
+  <body>
+    <main class="container">
+      <header>
+        <img src="./static/open_spec_gear_transparent.png" alt="FRS Tools logo" class="header-logo" />
+        <div>
+          <h1>Fullstack Requirement Specification (FRS) - Tools</h1>
+          <p>Validate, preview and edit FRS files.</p>
+        </div>
+      </header>
+
+      <section class="panel panel--status">
+        <ul class="status-list">
+          <li id="schemaStatus">Schema: loading…</li>
+          <li id="grammarStatus">Grammar: loading…</li>
+        </ul>
+      </section>
+
+      <section class="panel">
+        <div class="input-bar">
+          <button id="newFrsButton" type="button" class="btn">New FRS</button>
+          <button id="exportButton" type="button" class="btn" hidden>Export .md</button>
+        </div>
+        <div id="dropZone" class="drop-zone" role="region" aria-label="Drop frs.md file here">
+          <span class="drop-zone__label">Drop one or more <code>frs.md</code> files here</span>
+        </div>
+      </section>
+
+      <!-- File navigator bar — hidden until 2+ docs are loaded -->
+      <div id="fileNavigator" class="file-navigator" hidden></div>
+      <!-- File list sidebar — toggled by navigator bar -->
+      <div id="fileSidebar" class="file-sidebar" hidden></div>
+
+      <!-- Tab bar — hidden until a document is loaded -->
+      <nav id="tabBar" class="tab-bar" role="tablist" hidden>
+        <button class="tab-btn tab-btn--active" data-tab="preview" role="tab" aria-selected="true">Preview</button>
+        <button class="tab-btn" data-tab="edit" role="tab" aria-selected="false">Edit</button>
+        <button class="tab-btn" data-tab="summary" role="tab" aria-selected="false">Summary</button>
+      </nav>
+
+      <!-- Tab panels -->
+      <div id="tab-preview" class="tab-panel panel" role="tabpanel" aria-label="Preview">
+        <!-- populated by src/ui/preview.js -->
+      </div>
+      <div id="tab-edit" class="tab-panel panel" role="tabpanel" aria-label="Edit" hidden>
+        <!-- populated by src/ui/edit.js (TOOL-EDIT-001) -->
+      </div>
+      <div id="tab-summary" class="tab-panel panel" role="tabpanel" aria-label="Summary" hidden>
+        <!-- populated by src/ui/summary.js (TOOL-SUMMARY-001) -->
+      </div>
+    </main>
+
+    <script src="./app-config.js"></script>
+    <script type="module" src="./src/main.js"></script>
+  </body>
+</html>
